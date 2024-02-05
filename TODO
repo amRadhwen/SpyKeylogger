@@ -7,3 +7,5 @@
 7- screenshoting loop
 8- save log in separated files (sort using date** 00:00+(every new day))
 9- Stopped Jan 29 08:00
+10- reverse append to log files (new lines on top)
+11- Filter pressed key to generate words (in case there is no space or enter pressed !)

