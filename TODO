@@ -1,4 +1,4 @@
-1- Exception handling
+1- Exceptions handling
 2- Mouse control
 3- manipulate keyboard controll keys (esc, ctrl, tab...etc)
 4- use Threads with all the script
@@ -9,3 +9,4 @@
 9- Stopped Jan 29 08:00
 10- reverse append to log files (new lines on top)
 11- Filter pressed key to generate words (in case there is no space or enter pressed !)
+12- fix pyaudio permission

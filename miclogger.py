@@ -1,8 +1,6 @@
 import pyaudio
 import wave
 from dateTime import Datetime
-
-
 class MicLogger:
 
     def __init__(self, mic_log_filename):
@@ -17,6 +15,7 @@ class MicLogger:
 
         # initialize pyaudio
         self.pa = pyaudio.PyAudio()
+
 
     def record_mic(self):
         print("Recording !")
@@ -38,7 +37,7 @@ class MicLogger:
             channels=self.CHANNELS,
             rate=self.RATE,
             input=True,
-            frames_per_buffer=self.CHUNK
+            frames_per_buffer=self.CHUNK,
         )
         return stream
 
@@ -57,3 +56,29 @@ class MicLogger:
 
 # Test
 mic_logger = MicLogger("mic_log.txt")
+
+'''
+# using tkSnack
+import tkSnack
+from tkinter import *
+
+class MicLogger:
+    def __init__(self, mic_log_filename):
+        self.mic_log_filename = mic_log_filename
+
+    def start_recording(self):
+        root = Tk()
+        tkSnack.initializeSnack(root)
+        c = tkSnack.Sound(file="test.wav")
+        c.record()
+        root.after(5000, c.stop)
+        root.mainloop()
+
+
+    def stop_recording(self):
+        pass
+
+# Test
+mclogger = MicLogger("mic_log.txt")
+mclogger.start_recording()
+'''
