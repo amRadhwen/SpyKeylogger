@@ -10,3 +10,5 @@
 10- reverse append to log files (new lines on top)
 11- Filter pressed key to generate words (in case there is no space or enter pressed !)
 12- fix pyaudio permission
+13- fix file prepend 
+14- Stopped Feb 13 23:54
