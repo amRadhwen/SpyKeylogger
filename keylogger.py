@@ -100,3 +100,6 @@ class Keylogger:
 			new_log_file.seek(0)
 			new_log_file.write(input+temp)
 		return True
+
+	def write_keyboard_data(self, keyboard_data_filename, input):
+		pass

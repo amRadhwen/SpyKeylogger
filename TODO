@@ -12,3 +12,11 @@
 12- fix pyaudio permission
 13- fix file prepend 
 14- Stopped Feb 13 23:54
+15- extract a light version containing:
+    a- keyboard logger
+    b- mouse logger
+    c- screen logger
+    d- organized directories (screenshots, logs) into date separated files
+    e- extract words from keyboard
+    f- send log by e-mail
+    !!!! for one week
